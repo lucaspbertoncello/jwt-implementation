@@ -1,0 +1,9 @@
+services:
+  authJSTack:
+    image: postgres:latest
+    container_name: auth
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
