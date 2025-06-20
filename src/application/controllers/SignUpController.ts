@@ -1,3 +1,4 @@
+import { AccountAlreadyExists } from "../errors/AccountAlreadyExists";
 import { IController, IRequest, IResponse } from "../interfaces/IController";
 import { SignUpUseCase } from "../useCases/SignUpUseCase";
 import { z, ZodError } from "zod";
@@ -26,6 +27,13 @@ export class SignUpController implements IController {
         return {
           statusCode: 400,
           body: error.issues,
+        };
+      }
+
+      if (error instanceof AccountAlreadyExists) {
+        return {
+          statusCode: 409,
+          body: { error: error.message },
         };
       }
 
